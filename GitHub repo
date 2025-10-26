@@ -1,0 +1,43 @@
+from agents.interest_agent import InterestAgent
+from agents.skill_agent import SkillAgent
+from agents.career_agent import CareerAgent
+from agents.learning_agent import LearningAgent
+
+def run_career_compass(user_profile):
+    # Initialize agents
+    interest_agent = InterestAgent()
+    skill_agent = SkillAgent()
+    career_agent = CareerAgent()
+    learning_agent = LearningAgent()
+
+    # Step 1: Identify interests
+    interests = interest_agent.extract_interests(user_profile)
+
+    # Step 2: Validate and contextualize skills
+    validated_skills = skill_agent.validate_skills(user_profile)
+
+    # Step 3: Suggest career paths
+    career_paths = career_agent.suggest_careers(validated_skills, interests)
+
+    # Step 4: Recommend learning resources
+    resources = learning_agent.recommend_resources(career_paths)
+
+    # Final output
+    return {
+        "recommended_careers": career_paths,
+        "learning_resources": resources
+    }
+
+# Example usage
+if __name__ == "__main__":
+    sample_profile = {
+        "name": "Nokwazi",
+        "skills": ["Python", "Project Management", "Mentorship"],
+        "interests": ["Tech Education", "Community Advocacy"]
+    }
+
+    results = run_career_compass(sample_profile)
+    print("Career Recommendations:")
+    print(results["recommended_careers"])
+    print("\nLearning Resources:")
+    print(results["learning_resources"]
